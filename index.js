@@ -1,13 +1,14 @@
 var clicks = 0
 var seconds = 0
 var currentMole = -1
-var showMole = true
 var interval
+var showMole = true
 
 const handleStart = () => {
-    if (seconds > 0) return
-    document.getElementById('seconds').innerText = 'Elapsed time: ' + seconds
+    document.getElementById('clicks').innerText = 'Clicks: ' + clicks
+    document.getElementById('seconds').innerText = 'Elapsed time: ' + seconds + ' seconds'
     makeInterval()
+    document.getElementById('start-button').setAttribute('disabled', true)
 }
 
 const makeInterval = () => {
@@ -15,56 +16,53 @@ const makeInterval = () => {
 }
 
 const moleProgram = () => {
-    console.log('mole program')
     seconds++
-    document.getElementById('seconds').innerText = 'Elapsed time: ' + seconds
 
-    debounce()
+    document.getElementById('seconds').innerText = 'Elapsed time: ' + seconds + ' seconds'
+    console.log('mole program')
 
-    if (seconds < 1 || !showMole) return
+    debounce(() => showMole = true, 500)
+
+
+    if (!showMole) return
+
     const _random = getRandomInt(0, 2)
     currentMole = _random
+    console.log(_random)
     document.getElementsByClassName('mole-exist')[_random].src = './assets/mole.png'
-    hideMole()
+    debounce(hideMole, getRandomInt(200, 400))
 }
 
 const hideMole = () => {
-    setTimeout(() => {
-        document.getElementsByClassName('mole-exist')[currentMole].src = ''
-        currentMole = -1
-    }, getRandomInt(200, 400))
+    document.getElementsByClassName('mole-exist')[currentMole].src = ""
+    currentMole = -1
 }
 
-const debounce = () => {
-    setTimeout(() => {
-        showMole = true
-    }, 200)
+const debounce = (param, time) => {
+    setTimeout(param, time)
 }
 
-const clickHole = (index) => {
+const clickMole = (index) => {
     if (seconds <= 0) return
-    
+
     clicks++
-    document.getElementById('clicks').innerText = 'Click: ' + clicks
+    document.getElementById('clicks').innerText = 'Clicks: ' + clicks
     if (index !== currentMole) {
         showMole = false
-        document.getElementsByClassName('mole-exist')[currentMole].src = ''
-        currentMole = -1
+        hideMole()
     } else {
-        console.log('anda berhasil')
+        console.log('click mole berhasil')
         clearInterval(interval)
+        alert('Anda berhasil menyelesaikan ini dalam ' + seconds + ' detik dan dengan total click sebanyak ' + clicks)
         clearMoleProgram()
-        
-        alert('Selamat anda berhasil dalam ' + seconds + ' detaik dan total click ' + clicks)
     }
 }
 
 const clearMoleProgram = () => {
-    document.getElementsByClassName('mole-exist')[currentMole].src = ''
-    document.getElementById('start').classList.remove('bg-gray-400')
-    document.getElementById('start').classList.add('bg-pink-400')   
-    document.getElementById('seconds').innerText = ""
-    document.getElementById('clicks').innerText = ""
+    document.getElementById('clicks').innerText = ''
+    document.getElementById('seconds').innerText = ''
+    document.getElementById('start-button').removeAttribute('disabled')
+    document.getElementsByClassName('mole-exist')[currentMole].src = ""
 
     seconds = 0
     clicks = 0
@@ -72,8 +70,8 @@ const clearMoleProgram = () => {
     showMole = true
 }
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+const getRandomInt = (min, max) => {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min + 1)) + min
 }

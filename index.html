@@ -1,34 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="./index.js"></script>
-        <title>Mole</title>
-    </head>
-    <body>
-        <div class="flex justify-center select-none">
-            <div class="flex flex-col gap-5 self-center w-1/4 p-5 text-center">
-                <h1 class="font-bold text-2xl">MetaPals Catch a Mole!</h1>
-                <div class="flex gap-5 justify-center">
-                    <div onclick="clickHole(0)" class="bg-black w-20 h-20 ring:bg-gray-600 ring-4 rounded-full hole">
-                        <img src="" class="mole-exist">
-                    </div>
-                    <div onclick="clickHole(1)" class="bg-black w-20 h-20 ring:bg-gray-600 ring-4 rounded-full hole">
-                        <img src="" class="mole-exist">
-                    </div>
-                    <div onclick="clickHole(2)" class="bg-black w-20 h-20 ring:bg-gray-600 ring-4 rounded-full hole">
-                        <img src="" class="mole-exist">
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TAILWIND -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./index.js"></script>
+    <title>Mole Program</title>
+</head>
+<body>
+    <div class="flex justify-center">
+        <div class="w-1/2 flex flex-col gap-2 py-2 text-center">
+            <h1 class="text-2xl font-bold">MetaPals Catch a Mole!</h1>
+            <div class="flex gap-5 w-full justify-center mt-2">
+                <div onclick="clickMole(0)" class="h-20 w-20 rounded-full select-none bg-black ring-4 ring-gray-400">
+                    <img src="" alt="" class="mole-exist">
                 </div>
-                <div class="flex flex-col text-center">
-                    <span id="clicks"></span>
-                    <span id="seconds"></span>
+                <div onclick="clickMole(1)" class="h-20 w-20 rounded-full select-none bg-black ring-4 ring-gray-400">
+                    <img src="" alt="" class="mole-exist">
                 </div>
-                <button onclick="handleStart()" id="start" class="bg-gray-400 py-1 rounded w-fit mx-auto px-5 text-white">Start</button>
+                <div onclick="clickMole(2)" class="h-20 w-20 rounded-full select-none bg-black ring-4 ring-gray-400">
+                    <img src="" alt="" class="mole-exist">
+                </div>
             </div>
+            <div class="flex flex-col text-center py-5">
+                <span id="clicks"></span>
+                <span id="seconds"></span>
+            </div>
+            <button onclick="handleStart()" id="start-button" class="disabled:bg-gray-300 bg-pink-500 rounded-md mx-auto w-fit px-5 py-2 text-white mt-5">Start</button>
+            <div class="border border-solid border-t-0 border-r-0 border-l-0 border-black my-2"></div>
+            <h1 class="text-3xl font-bold">Guides</h1>
+            <ul class="text-left list-decimal">
+                <li>Time to finish: 1hr 30min.</li>
+                <li>Feel free to google.</li>
+                <li>Try this mini app and collect the requirements.</li>
+                <li>Feel free to ask the interviewer if you have any questions before and during working on this assignment.</li>
+                <li>Build the UI with vanilla javascript + CSS or SCSS, without React, Vue, Bootstrap, or any UI components library.</li>
+                <li>But using Tailwind CSS or similar CSS utilities is allowed.</li>
+                <li>Using assets bundler such as Vite or Webpack is allowed.</li>
+                <li>The time for the mole to hide itself is randomized between 200ms & 400ms.</li>
+                <li>There is "debounce" in the app, which is prevent the mole to come out from hole if you keep clicking on any hole rapidly.</li>
+                <li>The debounce function must be reusable</li>
+                <li>Submit by providing your GitHub repository information, include a README.md file and testable demo on GitHub pages.</li>
+            </ul>
         </div>
-    </body>
+    </div>
+</body>
 </html>
